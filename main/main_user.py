@@ -24,13 +24,13 @@ def user(request):
         login_user = request.args.get('login')
         check_user = request.args.get('check_user')
         name = request.args.get('name')
-        if (not(email) or not (password)):
-            return {"code:":"Error, necesitas correo y contraseña para autentificar", "status":400}
         if(check_user):
             if(not (name)):
                 return {"code:":"Error, necesitas nombre y contraseña recibir tus datos", "status":400}
             else:
                 return run_workflow_user(request = request, check_user = check_user)
+        if (not(email) or not (password)):
+            return {"code:":"Error, necesitas correo y contraseña para autentificar", "status":400}
         if (login_user):
             return run_workflow_user(request = request, login_user=login_user)
     return {"code":400, "status":"El metodo solo pude ser GET o POST"}
